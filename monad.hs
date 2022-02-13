@@ -35,13 +35,11 @@ foo' x y z = readMaybe x   `bindMaybe` \k ->
              readMaybe z `bindMaybe` \m ->
              Just(k + l + m)
 
-
-
 --readEither :: Read a => String -> Either String a
 readEither s = case readMaybe s of 
     Nothing -> Left $ "can't parse: " ++ s
-     Just a -> right a
-
+  --   Just a -> right a
+--
 
 data Writer a = Writer a [String]
      deriving Show 
@@ -74,3 +72,51 @@ threeInts' mx mz my = do
     l <- mz
     m <- my
     return $ k + l + m
+
+
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE DataKind #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
+--
+--module week04.contract where
+
+--import Control.Monad.Freer.Extras as Extras
+--import Data.Functor
+--import Data.Text (Text, unpack)
+--import Data.Void (Void)
+
+--import plutus.contract as contract
+--import plutus.contract.Trace.Emulator as Emulator
+import plutus.contract.Wallet.Emulator.Wallet 
+
+
+-- contract w s e a 
+-- EmulatorTrace a
+
+myContract1 :: Contract () Empty Text ()
+myContract1 = do
+    void $ Contract.throwError "myContract is not a contract"
+    Contract.logInfo @String "hello from the contract"
+
+
+myTrace1 :: EmulatorTrace ()
+myContract1 = Void $ activateContractWallet (knownWallet 1) myContract1
+
+test1 :: IO ()
+test1 =  runEmulatorTraceIO myTrace1
+
+
+myContract1 :: Contract () Empty Text ()
+myContract1 = do
+    void $ Contract.throwError "myContract is not a contract"
+    Contract.logInfo @String "hello from the contract"
+
+
+myTrace2 :: EmulatorTrace ()
+myContract2 = Void $ activateContractWallet (knownWallet 1) myContract2
+
+test2 :: IO ()
+test2 =  runEmulatorTraceIO myTrace2
