@@ -74,3 +74,10 @@ threeInts' mx mz my = do
     l <- mz
     m <- my
     return $ k + l + m
+    
+    
+foo'' :: String  -> String -> String -> Maybe Int
+foo'' x y z = readMaybe x   `bindMaybe` \k ->
+             readMaybe y `bindMaybe` \l ->
+             readMaybe z `bindMaybe` \m ->
+             Just(k + l + m)
