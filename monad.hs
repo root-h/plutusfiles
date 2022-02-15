@@ -1,12 +1,6 @@
 import Text.Read (readMaybe)
 import Data.Either ()
 
-
-foo :: IO  Int
-foo =  do
-  putStrLn "Hello, what's your name?"
-  name <- getLine
-  putStrLn ("Hey " ++ name ++ ", you rock!")
  
 
 bar :: IO ()
