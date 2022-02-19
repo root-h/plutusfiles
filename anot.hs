@@ -19,3 +19,5 @@ hClose handle
 hClose tempHandle
 removeFile "todo.txt"
 renameFile tempName "todo.txt"
+--few line of code will be coded to this 
+-- after creating and merging the new branches in the previous project
